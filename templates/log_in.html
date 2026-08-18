@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+
+            body{
+                background-image: url('/templates/resources/wall.jpg');
+                background-position: center;
+                background-size: contain;
+                background-color: gray;
+                display: grid;
+                grid-template-columns: 4fr 6fr;
+                grid-template-rows: 100%;
+                height:100vh;
+            }
+            .bodyLeft{
+                display: grid;
+                grid-template-areas:    'blank1 blank1 blank1' 
+                                        'blank2 frame blank4'
+                                        'blank3 blank3 blank3';
+                grid-template-columns: .5fr 5fr .5fr;
+                grid-template-rows: .5fr 10fr .5fr;
+            }
+
+            .bodyLeft .frame .door{
+                background-image: url('/templates/resources/log-in_door_left.png');
+                background-size:100% 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: yellow;
+                grid-area : door;
+            }
+            .bodyLeft .frame{
+                background-color: rgb(10, 73, 10);
+                display: grid;
+                grid-area: frame;
+                grid-template-areas:    'blank1 blank1 blank1'
+                                        'blank2 door blank3'
+                                        'blank4 blank4 blank4';
+                
+                grid-template-columns: 20px 1fr 20px;
+                grid-template-rows: 20px 1fr 20px;
+
+            }
+        
+
+            
+        
+        .bodyRight{
+            display: grid;
+            grid-template-areas: 'blank1 blank1 blank1'
+                        'blank2 card blank3' 
+                        'blank4 blank4 blank4' ;
+
+                        
+            grid-template-rows: 1fr 5fr 1fr;
+            grid-template-columns: 1fr 4fr .5fr;
+        }
+        
+        .card{
+            background-color: rgba(255, 255, 255, 0.38);
+            border:2px solid rgb(248, 248, 248,0.12);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            grid-area: card;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .card::-webkit-scrollbar {
+           display: none;
+        }
+
+        .card label{
+            display: flex;
+            flex-direction: column;
+            padding: 4%;
+            
+        }
+        .card label .inputs{
+            
+            background: transparent;
+            border: 2px solid rgb(255, 253, 253,0.12);
+            border-radius: 100px;
+            height: 30px;
+            padding: 10px;
+            margin: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="bodyLeft">
+
+        <div class='frame'>
+            <div class="door"></div>
+        </div>
+    
+    </div>
+    <div class="bodyRight">
+
+
+
+        <div class="card">
+            <label for="userName">
+                <h1>Enter User Name</h1>
+                <input type="text" id="userName" placeholder="Enter User Name" class="inputs">
+            </label>
+            <label for="password">
+                <h1>Enter Password</h1>
+                <input type="text" id="password" placeholder="Enter password " class="inputs">
+            </label>
+        </div>
+
+
+    </div>
+
+    
+</body>
+</html>
