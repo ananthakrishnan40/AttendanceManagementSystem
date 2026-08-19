@@ -6,10 +6,14 @@ from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from typing import Annotated
-from auth import router
+import auth
+import markAttendence
+import admin
 
 app = FastAPI()
-app.include_router(router)
+app.include_router(auth.router)
+app.include_router(markAttendence.router)
+app.include_router(admin.router)
 
 
 

@@ -115,6 +115,34 @@
         .loginButton:hover{
             background-color: rgba(232, 228, 25, 0.555)
         }
+        .admin{
+            justify-self: center;
+            align-self:center;
+            background-color: rgb(0, 163, 19,.50);
+            backdrop-filter: blur(5px);
+            border:2px solid rgb(0, 163, 19,.80);
+            border-radius: 8px;
+            height: 8%;
+            width: 20%;
+            font-size: large;
+        }
+        .door {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .glass{
+            color: rgb(0, 0, 0,.50);
+            font-size: large;
+        }
+        .mark{
+            background-color: rgba(0, 255, 30, 0.5);
+            backdrop-filter: blur(5px);
+            border:2px solid rgb(0, 255, 19,.80);
+            border-radius: 8px;
+            font-size: large;
+        }
 
     </style>
 </head>
@@ -122,7 +150,9 @@
     <div class="bodyLeft">
 
         <div class='frame'>
-            <div class="door" id="door"></div>
+            <div class="door" id="door">
+                <button class='admin'id="admin">Admin</button>
+            </div>
         </div>
     
     </div>
@@ -164,16 +194,68 @@
             const resp = await data.json();
             console.log(resp)
             console.log(resp.Data);
-            door.innerHTML='<h1>wrong credentials<h1>';
+            door.innerHTML='<h1>wrong credentials</h1>';
             alert(resp)
             if(resp.valid){ 
 
             const door = document.getElementById('door')
-            door.innerHTML=`<h1>${resp.Data.Employee_Name}<h1>
-                <button>Mark Attendence</button>`;
+            door.innerHTML=`<h1 class = 'glass'>Welcome ${resp.Data.Employee_Name}<h1>
+                <button class='mark'id='markA'>Mark Attendence</button>`;
+                
+                sessionStorage.setItem('userName',resp.Data.Employee_Name);
+                sessionStorage.setItem('userId',(resp.Data.Employee_Id));
+
+                markA = document.getElementById('markA')
+                markA.addEventListener('click',async ()=>{
+                    const response = await fetch('/attendence/markAttendence',{
+                        method:'POST',
+                        headers:{'Content-Type' : 'application/json'},
+                        body:JSON.stringify({
+                            'Employee_Id': sessionStorage.getItem('userId')
+                        })
+                    })
+                    alert(sessionStorage.getItem('userId'));
+                    console.log(response)
+                    const result = await response.json();
+                    console.log('thsi is the result of mark attendence ',result);
+                    if(result.sucess){
+                        alert('attendence markde successfullt');
+                    }
+                    else{
+                        alert('somthing went wrong');
+                    }
+                    })
             }
         })
 
+        const admin = document.getElementById('admin')
+        admin.addEventListener('click',async ()=>{
+            const server = await fetch('/admin/login',{
+                        method:'POST',
+                        headers:{'Content-Type' : 'application/json'},
+                        body:JSON.stringify({
+                            'userName': userName.value,
+                            'password':password.value
+                        })
+                    })
+                    let response =await server.json()
+                    console.log(response)
+                    if(response.validation){
+                        alert('admin log in sucess full')
+                    }
+                    else{
+                        alert('admin log in fail check credentials')
+                    }
+                    sessionStorage.setItem('user_id',response.data.User_Id);
+                    sessionStorage.setItem('user_name',response.data.User_Name);
+                    sessionStorage.setItem('user_status',response.data.User_Status)
+
+                    if(sessionStorage.getItem('user_status') == 'ACTIVE'){
+                        window.location.href='/admin/dashboard'
+                    }
+                })
+
+            
     </script>
     
 </body>
