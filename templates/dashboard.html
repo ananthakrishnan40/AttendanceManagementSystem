@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image:url('/resources/log-in_bg_right.jpg');
+            display:grid;
+            grid-template-areas: 'blank1 left blank right blank2';
+            grid-template-columns :.1fr 1.5fr .3fr 6fr .1fr;
+            grid-template-rows: 100vh;
+            padding-top:30px;
+
+        }
+
+        .left{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            grid-area : left;
+        }
+            
+        .optionsleft{
+            display:flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.38);
+            border:2px solid rgb(248, 248, 248,0.12);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            grid-area: optionsleft;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            height:100%;
+            width:100%;
+            padding-top:30px;
+
+        }
+        .leftbutton{
+            background-color: rgba(31, 34, 186, 0.701);
+            border:2px solid rgb(69, 71, 223,0.12);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            height:10%
+            
+        }
+        .leftbutton:hover{
+            background-color: rgba(0, 1, 75, 0.701);
+
+        }
+
+        .right{
+            grid-area:right;
+        }
+        .optionsright{
+            display:flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.38);
+            border:2px solid rgb(248, 248, 248,0.12);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            grid-area: optionsleft;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            height:100%;
+            width:100%;
+            padding-top:30px;
+
+        }
+
+        .center{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .headding{
+            font-size: large;
+        }
+        .row{
+            display:flex;
+            flex-direction: row;
+        }
+        .glass{
+            background-color: rgba(255, 255, 255, 0.38);
+            border:2px solid rgb(248, 248, 248,0.12);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+        .inline{
+            display:inline;
+        }
+        .detail{
+            margin-left: 20px;
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">
+            <div class="optionsleft">
+                <button id="searchbyid" class="leftbutton">Search By Id</button>
+                <button id='presenttoday'class="leftbutton">Present Today</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="right">
+
+        <div class="optionsright">
+            <!-- div section one -->
+
+                <div name="display" id="searchbyid_display">
+                    <div class="center headding">
+                        <h1>Search Employee BY ID</h1>
+                    </div>
+
+                    <div class="row">
+                        <label for="Employee_id">
+                            <h2>Enter the Employee ID
+                                <input class='glass' type="text" placeholder="Enter the ID " id="Employee_id">
+                                <button id="Id_search">Search</button>
+                            </h2>
+                        </label>
+                    </div>
+
+                    <div class="glass" style="margin:25px;" id="table">
+                        <h1>Employee Details....</h1>
+                    </div>
+                
+                </div>
+
+            <!-- div section one end -->
+
+            <!-- div2 begins -->
+             <div id="presenttoday_display" name="display">
+                <h1>Employees Who are present Today</h1>
+                <label for="checkDate">
+                    Enter the date in dd-mm-yyyy
+                    <input type="text" id="checkDate">
+                    <button id="searchbydate">search</button>
+                </label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Department ID</th>
+                                <th>Department</th>
+                                <th>Check In</th>
+                                <th>Attendance Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="present_today_table">
+                        </tbody>
+                    </table>
+             </div>
+             
+             <!-- div 2 ends here -->
+
+
+    </div>
+
+    <script src="/templates/searchbyid.js" defer></script>
+
+</body>
+</html>

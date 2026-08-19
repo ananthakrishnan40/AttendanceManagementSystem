@@ -5,6 +5,8 @@ from typing import Annotated
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from database import sessionLocal
+from fastapi.responses import HTMLResponse
+import jose
 
 router = APIRouter(prefix='/admin',tags=['Admin'])
 
@@ -42,9 +44,56 @@ async def checkadmin(credentials : Admin_login_validation,db:db_dependency):
     else:
         return {'validation':False,
                 'redirect':False}
+        
+        
+# @router.post('/validate')
+# def JWTvalidation(jwt):
+    
+    
+
 
 
 @router.get('/dashboard')
 async def load_DashBoard(db:db_dependency):
     print('success')
-    return 'success now need to create dashboard'    
+    html = open('templates/dashboard.html').read()
+    return HTMLResponse(html)
+
+class idvalidation(BaseModel):
+    Employee_id:int
+
+
+@router.post('/dashboard/searchbyid')
+async def search_by_id(data:idvalidation,db:db_dependency):
+       empId = data.Employee_id
+       result = db.execute(text('select * from employee where Employee_ID = :employeeid'),{'employeeid':empId}).first()
+       if result:
+           return {
+               'sucess':True,
+               'data':dict(result._mapping)
+               }
+       else:
+           return {'sucess':False}
+
+class datevalidation(BaseModel):
+    date : str
+        
+@router.post('/dashboard/presenttoday')
+async def presenttoday(datedata:datevalidation,db:db_dependency):
+    date = datedata.date
+    print(date)
+    data = db.execute(text('select E.Employee_Name as Name, E.Mobile_Number as Mobile, E.Email_Id, E.Department_Id as Department_Id, A.check_In_Time as Check_In, dep.Dept_Name as Department_Name , A.Attendence_Date from attendence A left join employee E on A.Employee_Id = E.Employee_Id left join department dep on E.Department_Id = dep.Dept_Id and A.Attendence_Date = curdate();')).all()
+    if data:
+        result = []
+        for i in data:
+            result.append(dict(i._mapping))
+        return {
+            'sucess': True,
+            'data' : result
+        }
+    else:
+        return {
+            'sucess':False
+        }
+
+    

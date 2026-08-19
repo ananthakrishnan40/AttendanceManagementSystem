@@ -16,7 +16,7 @@ app.include_router(markAttendence.router)
 app.include_router(admin.router)
 
 
-
+app.mount('/templates', StaticFiles(directory='templates'))
 
 def get_db():
     db = sessionLocal()
