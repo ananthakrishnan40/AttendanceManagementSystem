@@ -103,13 +103,39 @@
             margin-left: 20px;
             padding:20px;
         }
+        .alignH{
+            display:flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        #div3 label{
+            margin:50px;
+        }
+        .table td{
+            background-color: rgba(83, 18, 214, 0.545);
+            backdrop-filter: blur(5px);
+            padding:10px;
+            border: 2px solid rgb(35, 8, 213);
+        }
+        .table th{
+            background-color: rgba(253, 253, 78, 0.473);
+            backdrop-filter: blur(5px);
+            padding:10px;
+            border: 2px solid rgb(224, 236, 96);
+            margin:20px;
+        }
+        .table tr{
+            margin:20px;
+        }
     </style>
 </head>
 <body>
     <div class="left">
             <div class="optionsleft">
                 <button id="searchbyid" class="leftbutton">Search By Id</button>
-                <button id='presenttoday'class="leftbutton">Present Today</button>
+                <button id='presenttoday'class="leftbutton">Check By Date</button>
+                <button id='addEmployee'class="leftbutton">Add Employee</button>
             </div>
         </div>
     </div>
@@ -144,14 +170,19 @@
             <!-- div section one end -->
 
             <!-- div2 begins -->
-             <div id="presenttoday_display" name="display">
-                <h1>Employees Who are present Today</h1>
+             <div id="presenttoday_display" style="margin-left:20%;" name="display">
+
+                <div class="center headding">
+                        <h1>Attendence By Date</h1>
+                    </div>
+
+
                 <label for="checkDate">
                     Enter the date in dd-mm-yyyy
                     <input type="text" id="checkDate">
                     <button id="searchbydate">search</button>
                 </label>
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -170,6 +201,105 @@
              </div>
              
              <!-- div 2 ends here -->
+
+             <!-- div 3 begins -->
+
+             <div id="div3" name="display">
+
+                <div class="center headding">
+                    <h1>Add Employee</h1>
+                </div>
+
+                        <!-- Employee_Id
+                        Employee_Name
+                        Email_Id
+                        Mobile_Number
+                        Department_Id
+
+                        Desigination
+
+                        Added_By
+
+                        Added_at
+
+                        Employee_Password
+                        Status -->
+
+
+
+
+
+
+                    <div class="alignH">
+                        <form id="addEmployeeform">
+                            <label for="Employee_Name">
+                                Employee_Name:
+                                <input type="text" id="Employee_Name">
+                            </label>
+
+                            <label for="Employee_Id">
+                                Employee_Id:
+                                <input type="text" id="Employee_Id">
+                            </label>
+
+                            <label for="Email_Id">
+                                Email_Id:
+                                <input type="text" id="Email_Id">
+                            </label>
+
+                            <label for="Mobile_Number">
+                                Mobile_Number:
+                                <input type="text" id="Mobile_Number">
+                            </label>
+
+
+                            <label for="Department_Id">
+                                Department_Id:
+                                <input type="text" id="Department_Id">
+                            </label>
+
+
+                            <label for="Desigination">
+                                Desigination:
+                                <input type="text" id="Desigination">
+                            </label>
+
+
+                            <label for="Added_By">
+                                Added_By:
+                                <input type="text" id="Added_By">
+                            </label>
+
+                            <label for="Added_at">
+                                Added_at:
+                                <input type="text" id="Added_at">
+                            </label>
+
+
+                            <label for="Employee_Password">
+                                Employee_Password:
+                                <input type="text" id="Employee_Password">
+                            </label>
+
+                            <input type="submit" placeholder="Submit">
+
+                        </form>
+                        
+                    </div>
+
+
+
+             </div>
+
+
+
+
+
+
+
+
+
+             <!-- div 3 ends here -->
 
 
     </div>

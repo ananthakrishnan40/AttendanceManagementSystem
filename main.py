@@ -48,23 +48,4 @@ class AddUserValidation(BaseModel):
 db_dependency = Annotated[Session,Depends(get_db)]
 
 
-@app.post('/add_Employee')
-async def addEmployee(db:db_dependency):
-    print("Connection Database")
-    data = {
-        'Employee_Id' : 3,
-        'Employee_Name' :'Appu',
-        'Email_Id' :'appu@gmail.com',
-        'Mobile_Number':'7994095129',
-        'Department_Id':5,
-        'Desigination':'DEV',
-        'Added_By':1,
-        'Employee_Password':'123',
-        'Status':'ACTIVE'
-        }
-    db.execute(text("insert into employee(Employee_Id,Employee_Name,Email_Id,Mobile_Number,Department_Id,Desigination,Added_By,Added_at,Employee_Password,Status) values(:Employee_Id,:Employee_Name,:Email_Id,:Mobile_Number,:Department_Id,:Desigination,:Added_By,curdate(),:Employee_Password,:Status);"),data)
-    db.commit()
-    return 'sucess'
-
-
     

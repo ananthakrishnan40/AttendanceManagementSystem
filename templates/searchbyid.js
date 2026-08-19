@@ -97,3 +97,66 @@ presenttoday.addEventListener('click',async ()=>{
 });
 
 //second button end
+
+//start of 3rd button
+// ==================== THIRD BUTTON - ADD EMPLOYEE ====================
+
+const addEmployee = document.getElementById('addEmployee');
+
+addEmployee.addEventListener('click', () => {
+
+    const DOM = document.getElementsByName('display');
+
+    for (let element of DOM) {
+        element.style.display = 'none';
+    }
+
+    const display = document.getElementById('div3');
+    display.style.display = '';
+});
+
+
+// Add Employee Form
+const addEmployeeForm = document.getElementById('addEmployeeform');
+
+addEmployeeForm.addEventListener('submit', async (event) => {
+
+    event.preventDefault();
+
+    // Automatically collect every input having a name=""
+    const formData = new FormData(addEmployeeForm);
+
+    // Convert FormData → normal JavaScript object
+    const employeeData = Object.fromEntries(formData);
+
+    console.log('Employee data:', employeeData);
+
+    try {
+
+        const response = await fetch('/admin/dashboard/add_Employee', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(employeeData)
+        });
+
+        const result = await response.json();
+
+        console.log('Server response:', result);
+
+        if (result.sucess) {
+            alert('Employee added successfully!');
+            addEmployeeForm.reset();
+        } 
+        else {
+            alert('Employee was not added.');
+        }
+
+    } catch (error) {
+
+        console.error('Error:', error);
+        alert('Something went wrong while adding employee.');
+
+    }
+});

@@ -22,7 +22,7 @@
                                         'blank2 frame blank4'
                                         'blank3 blank3 blank3';
                 grid-template-columns: .5fr 5fr .5fr;
-                grid-template-rows: .5fr 10fr .5fr;
+                grid-template-rows: .2fr 10fr .5fr;
             }
 
             .bodyLeft .frame .door{
@@ -76,6 +76,7 @@
             backdrop-filter: blur(5px);
             overflow-y: auto;
             scroll-behavior: smooth;
+            transition: 0.3s ease;
         }
 
         .card::-webkit-scrollbar {
@@ -110,10 +111,12 @@
             margin: 30px;
             backdrop-filter: blur(5px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            background-color: rgba(242, 239, 39, 0.827)
+            background-color: rgba(242, 239, 39, 0.827);
+            transition: 0.3s ease;
         }
         .loginButton:hover{
-            background-color: rgba(232, 228, 25, 0.555)
+            background-color: rgba(232, 228, 25, 0.555);
+            scale:1.1;
         }
         .admin{
             justify-self: center;
@@ -125,6 +128,12 @@
             height: 8%;
             width: 20%;
             font-size: large;
+            transition: 0.3s ease;
+        }
+        .admin:hover{
+            background-color:rgba(2, 63, 9, 0.8);
+            scale:1.1;
+
         }
         .door {
             display: flex;
@@ -142,6 +151,9 @@
             border:2px solid rgb(0, 255, 19,.80);
             border-radius: 8px;
             font-size: large;
+        }
+        .card:hover{
+            scale: 1.1;
         }
 
     </style>
