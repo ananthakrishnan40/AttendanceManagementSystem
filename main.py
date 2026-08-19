@@ -6,9 +6,10 @@ from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from typing import Annotated
-
+from auth import router
 
 app = FastAPI()
+app.include_router(router)
 
 
 
@@ -60,4 +61,6 @@ async def addEmployee(db:db_dependency):
     db.execute(text("insert into employee(Employee_Id,Employee_Name,Email_Id,Mobile_Number,Department_Id,Desigination,Added_By,Added_at,Employee_Password,Status) values(:Employee_Id,:Employee_Name,:Email_Id,:Mobile_Number,:Department_Id,:Desigination,:Added_By,curdate(),:Employee_Password,:Status);"),data)
     db.commit()
     return 'sucess'
+
+
     
