@@ -114,6 +114,9 @@ async def addEmployee(data : adduserValidation,db:db_dependency):
     db.execute(text("insert into employee(Employee_Id,Employee_Name,Email_Id,Mobile_Number,Department_Id,Desigination,Added_By,Added_at,Employee_Password,Status) values(:Employee_Id,:Employee_Name,:Email_Id,:Mobile_Number,:Department_Id,:Desigination,:Added_By,curdate(),:Employee_Password,:Status);"),data.model_dump())
     db.commit()
     return {'sucess': True}
-    
+
+@router.post('/check/check')
+async def check___():
+    return {'sucess':True}
     
     
